@@ -32,6 +32,7 @@ const Dashboard: React.FC = () => {
     const handleDeactivate = async (bookId: number) => {
         try {
             const updatedBook = await updateBookStatus(bookId, 'deactivated');
+            updatedBook.modifiedAt = new Date().toISOString();
             setBooks(books.map((book) => (book.id === bookId ? updatedBook : book)));
         } catch (error) {
             console.error('Error updating book status:', error);
@@ -41,6 +42,7 @@ const Dashboard: React.FC = () => {
     const handleReactivate = async (bookId: number) => {
         try {
             const updatedBook = await updateBookStatus(bookId, 'active');
+            updatedBook.modifiedAt = new Date().toISOString();
             setBooks(books.map((book) => (book.id === bookId ? updatedBook : book)));
         } catch (error) {
             console.error('Error updating book status:', error);
