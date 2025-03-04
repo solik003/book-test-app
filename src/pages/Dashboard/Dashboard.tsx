@@ -62,7 +62,7 @@ const Dashboard: React.FC = () => {
     const totalNumberOfRecords = books.length;
     const numberOfRecords = filteredBooks.length;
 
-    
+
     return (
         <div className="flex flex-col min-h-screen">
             <div className="flex-1 bg-gradient-to-br from-blue-100 to-gray-200 max-w-screen-xl mx-auto p-6 rounded-xl shadow-xl">
@@ -161,7 +161,7 @@ const Dashboard: React.FC = () => {
             </div>
             <footer className="bg-gray-800 text-white text-center p-4 mt-4 w-1/2 mx-auto">
                 <a
-                    href="https://github.com/yourgithubusername"
+                    href="https://github.com/solik003"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:underline"
