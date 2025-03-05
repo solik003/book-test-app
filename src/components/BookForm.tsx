@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { BookFormProps } from "../types";
+import { BASE_URL } from "../config";
 
-const API_URL = "http://localhost:5000/books";
+const API_URL = `${BASE_URL}/books`;
 
 const BookForm: React.FC<BookFormProps> = ({ mode, onSuccess }) => {
     const navigate = useNavigate();
@@ -62,9 +63,9 @@ const BookForm: React.FC<BookFormProps> = ({ mode, onSuccess }) => {
     };
 
     return (
-        <div className="max-w-xl mx-auto p-6 bg-white rounded-lg shadow-xl m-2">
-            <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">{mode === "edit" ? "Edit Book" : "Add a Book"}</h2>
-            <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="max-w-xl mx-auto p-6 bg-white rounded-lg shadow-xl m-2 sm:m-4">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6 text-center">{mode === "edit" ? "Edit Book" : "Add a Book"}</h2>
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                 <label className="block text-sm font-semibold text-gray-700">Book Title:</label>
                 <input
                     type="text"
@@ -72,7 +73,7 @@ const BookForm: React.FC<BookFormProps> = ({ mode, onSuccess }) => {
                     value={book.title}
                     onChange={handleChange}
                     required
-                    className="mt-2 p-3 border border-gray-400 rounded-lg w-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+                    className="mt-1 p-2 sm:p-3 border border-gray-400 rounded-lg w-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
                 />
 
                 <label className="block text-sm font-semibold text-gray-700">Author Name:</label>
@@ -85,7 +86,7 @@ const BookForm: React.FC<BookFormProps> = ({ mode, onSuccess }) => {
                     className="mt-2 p-3 border border-gray-300 rounded-md w-full focus:ring-2 focus:ring-blue-500"
                 />
 
-                <label className="block text-sm font-medium text-gray-700">Category:</label>
+                <label className="block text-sm font-semibold text-gray-700">Category:</label>
                 <select
                     name="category"
                     value={book.category}
@@ -106,10 +107,10 @@ const BookForm: React.FC<BookFormProps> = ({ mode, onSuccess }) => {
                     value={book.isbn}
                     onChange={handleChange}
                     required
-                    className="mt-2 p-3 border border-gray-300 rounded-md w-full focus:ring-2 focus:ring-blue-500"
+                    className="mt-1 p-2 sm:p-3 border border-gray-300 rounded-md w-full focus:ring-2 focus:ring-blue-500"
                 />
 
-                <button type="submit" className="w-full py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300">{mode === "edit" ? "Update Book" : "Add a Book"}</button>
+                <button type="submit" className="w-full py-2 sm:py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300">{mode === "edit" ? "Update Book" : "Add a Book"}</button>
             </form>
         </div>
     );
