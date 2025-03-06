@@ -20,7 +20,7 @@ export const getBooksById = async (id: string): Promise<Book> => {
     return response.json();
 };
 
-export const createBook = async (book: Book): Promise<Book> => {
+export const createBook = async (book: Partial<Book>): Promise<Book> => {
     const response = await fetch(API_URL, {
         method: 'POST',
         headers: {
@@ -29,8 +29,6 @@ export const createBook = async (book: Book): Promise<Book> => {
         body: JSON.stringify({
             ...book,
             createdAt: new Date().toISOString(),
-            modifiedAt: new Date().toISOString(),
-            status: 'active',
         }),
     });
     if (!response.ok) {

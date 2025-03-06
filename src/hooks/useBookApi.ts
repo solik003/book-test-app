@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
 
 import { SUCCESS_MESSAGES, ERROR_MESSAGES } from "../constants/messages";
-import { Book } from "../types";
 import { MODE } from "../constants/mods";
 import { createBook, getBooksById, updateBook } from "../services/bookService";
+import { Book } from "../types";
 
-export const useBookApi = (mode: typeof MODE.CREATE | typeof MODE.EDIT, id: string) => {
-    const [book, setBook] = useState<Book>({
-        id: "",
+export const useBookApi = (mode: typeof MODE.CREATE | typeof MODE.EDIT, id?: string) => {
+    const [book, setBook] = useState<Partial<Book>>({
         title: "",
         author: "",
         category: "",
@@ -26,9 +25,6 @@ export const useBookApi = (mode: typeof MODE.CREATE | typeof MODE.EDIT, id: stri
             const fetchBook = async () => {
                 setLoading(true);
                 try {
-                    // const response = await fetch(`${API_URL}/${id}`);
-                    // if (!response.ok) throw new Error("Failed to fetch book");
-                    // const data = await response.json();
                     const data = await getBooksById(id);
                     console.log(data);
                     setBook(data);
@@ -57,10 +53,12 @@ export const useBookApi = (mode: typeof MODE.CREATE | typeof MODE.EDIT, id: stri
                 const createdBook = await createBook(book);
                 setBook(createdBook);
                 return SUCCESS_MESSAGES.CREATE;
-            } else {
+            } else if (mode === MODE.EDIT && id) {
                 const updatedBook = await updateBook(id, book);
                 setBook(updatedBook);
                 return SUCCESS_MESSAGES.EDIT;
+            } else {
+                throw new Error("Invalid mode or missing ID for edit");
             }
         } catch (error) {
             setError(mode === MODE.EDIT ? ERROR_MESSAGES.EDIT : ERROR_MESSAGES.CREATE);

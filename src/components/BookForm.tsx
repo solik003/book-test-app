@@ -6,9 +6,8 @@ import { useBookApi } from "../hooks/useBookApi";
 
 export const BookForm: React.FC<BookFormProps> = ({ mode }) => {
     const {id} = useParams();
-    const bookId = id ?? '';
-    
-    const { book, handleChange, createEditBook } = useBookApi(mode, bookId);
+
+    const { book, handleChange, createEditBook } = useBookApi(mode, id);
     const navigate = useNavigate();
 
     const onSubmit = (e: React.FormEvent) => {

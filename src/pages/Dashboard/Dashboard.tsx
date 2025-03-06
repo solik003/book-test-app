@@ -10,7 +10,7 @@ import { filterOptions } from '../../config/filterOptions';
 const Dashboard: React.FC = () => {
 
     const { filteredBooks, filter, setFilter, totalFilteredBooks } = useFilteredBooksContext();
-    const { books, handleToggleStatus, handleDelete, totalBooks } = useBooksContext();
+    const { handleToggleStatus, handleDelete, totalBooks } = useBooksContext();
 
     const handleFilterChange = useCallback(
         (e: React.ChangeEvent<HTMLSelectElement>) => {
