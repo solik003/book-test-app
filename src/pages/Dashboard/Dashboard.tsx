@@ -20,7 +20,7 @@ const Dashboard: React.FC = () => {
     );
 
     return (
-        <div className="flex flex-col min-h-screen px-4 sm:px-6 md:px-8 py-6 border-blue-400">
+        <div className="flex flex-col px-4 sm:px-6 md:px-8 py-6 border-blue-400">
             <div className="flex-1 bg-gradient-to-br from-blue-100 to-gray-200 max-w-full sm:max-w-3xl md:max-w-5xl mx-auto p-6 rounded-xl shadow-xl">
                 <div className="mb-8">
                     <h1 className="text-4xl font-bold text-gray-800">Dashboard</h1>
