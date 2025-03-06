@@ -1,5 +1,6 @@
 import { useNavigate, useParams, Link } from "react-router-dom";
 import {BookForm} from "../../components/BookForm";
+import { MODE } from "../../constants/mods";
 
 export const BookFormPage = () => {
     const { id } = useParams();
@@ -9,7 +10,7 @@ export const BookFormPage = () => {
         navigate("/");
     };
 
-    const mode = id ? "edit" : "create";
+    const mode = id ? MODE.EDIT : MODE.CREATE;
 
     if (id && !mode) {
         return <div>Loading...</div>;
