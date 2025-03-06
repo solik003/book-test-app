@@ -1,71 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { BookFormProps } from "../types";
-import { BASE_URL } from "../config";
+import { useBookApi } from "../hooks/useBookApi";
 
-const API_URL = `${BASE_URL}/books`;
 
-const BookForm: React.FC<BookFormProps> = ({ mode, onSuccess }) => {
+export const BookForm: React.FC<BookFormProps> = ({ mode }) => {
+    const {id} = useParams();
+    const bookId = id ?? '';
+    
+    const { book, handleChange, createEditBook } = useBookApi(mode, bookId);
     const navigate = useNavigate();
-    const { id } = useParams();
 
-    const [book, setBook] = useState({
-        title: "",
-        author: "",
-        category: "",
-        isbn: "",
-    });
-
-    useEffect(() => {
-        if (mode === "edit" && id) {
-            const fetchBook = async () => {
-                try {
-                    const response = await fetch(`${API_URL}/${id}`);
-                    if (!response.ok) throw new Error("Failed to fetch book");
-                    const data = await response.json();
-                    setBook(data);
-                } catch (error) {
-                    console.error("Error fetching book:", error);
-                }
-            };
-            fetchBook();
-        }
-    }, [mode, id]);
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-        setBook({ ...book, [e.target.name]: e.target.value });
-    };
-
-    const handleSubmit = async (e: React.FormEvent) => {
+    const onSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-
-        try {
-            const method = mode === "edit" ? "PUT" : "POST";
-            const endpoint = mode === "edit" ? `${API_URL}/${id}` : API_URL;
-
-            const response = await fetch(endpoint, {
-                method,
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(book),
-            });
-
-            if (!response.ok) throw new Error("Failed to submit book");
-
-            alert(`${mode === "edit" ? "Updated" : "Added"} book successfully!`);
-            onSuccess();
-            navigate("/");
-        } catch (error) {
-            console.error("Error submitting book:", error);
-            alert(`Failed to ${mode === "edit" ? "update" : "add"} book.`);
-        }
+        createEditBook();
+        navigate("/");
     };
 
     return (
         <div className="max-w-xl mx-auto p-6 bg-white rounded-lg shadow-xl m-2 sm:m-4">
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6 text-center">{mode === "edit" ? "Edit Book" : "Add a Book"}</h2>
-            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+            <form onSubmit={onSubmit} className="space-y-4 sm:space-y-6">
                 <label className="block text-sm font-semibold text-gray-700">Book Title:</label>
                 <input
                     type="text"
@@ -115,5 +70,3 @@ const BookForm: React.FC<BookFormProps> = ({ mode, onSuccess }) => {
         </div>
     );
 };
-
-export default BookForm;
