@@ -81,20 +81,6 @@
       "status": "deactivated"
     },
     {
-      "id": "13",
-      "title": "test title 34",
-      "author": "author",
-      "category": "Fiction",
-      "isbn": "21312121124"
-    },
-    {
-      "id": "15",
-      "title": "test title",
-      "author": "test author",
-      "category": "Fiction",
-      "isbn": "13123231223"
-    },
-    {
       "id": "16",
       "title": "New Book",
       "author": "New Author",
@@ -121,6 +107,16 @@
       "isbn": "2341442149",
       "createdAt": "2025-03-06T15:07:01.168Z",
       "modifiedAt": "2025-03-06T15:08:44.577Z",
+      "status": "active"
+    },
+    {
+      "id": "07b6",
+      "title": "testttt",
+      "author": "test",
+      "category": "Fiction",
+      "isbn": "123331331`3",
+      "createdAt": "2025-03-06T16:02:14.714Z",
+      "modifiedAt": null,
       "status": "active"
     }
   ]
