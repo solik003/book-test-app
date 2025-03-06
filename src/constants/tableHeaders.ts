@@ -1,9 +1,10 @@
-export const BOOK_TABLE_HEADERS = [
-    "Book Title",
-    "Author Name",
-    "Category",
-    "ISBN",
-    "Created At",
-    "Modified At",
-    "Actions"
-];
+
+export const BOOK_TABLE_HEADERS = {
+    title: "Book Title",
+    author: "Author Name",
+    category: "Category",
+    isbn: "ISBN",
+    createdAt: "Created At",
+    modifiedAt: "Modified At",
+    actions: "Actions"
+};
